@@ -5,6 +5,10 @@
 #include <vector>
 #include <fstream>
 
+#include <direct.h>
+#include <io.h>
+#include <string>
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -137,6 +141,15 @@ struct BMP_Color
 
 // -------------------------------------------------------------------------------------------------------- //
 
+void isDirExist()
+{
+	const char* dir = "./results/images"; 
+	if (_access(dir, 0) == -1)
+	{
+		_mkdir(dir);
+	}
+}
+
 
 int main(int argc, char *argv[]) {
 
@@ -145,6 +158,8 @@ int main(int argc, char *argv[]) {
         std::cout << "The number of the argument is not 2; perhaps you forgot the name of an image." << std::endl;
         return 0;
     }
+
+    isDirExist();
 
     int width = 0, height = 0, bpp = 0;
 
@@ -183,7 +198,7 @@ int main(int argc, char *argv[]) {
         .reserved                 = {0},
         .offset_start_framebuffer = sizeof(BMP_Header) + sizeof(BMP_Info_Header)
     };
-
+    
     const BMP_Info_Header info_header = {
         .header_size          = sizeof(BMP_Info_Header),
         .width                = (uint32_t)width,
