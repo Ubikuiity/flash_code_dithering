@@ -179,7 +179,7 @@ int main(int argc, char *argv[]) {
 
     const BMP_Header bmp_header = {
         .type                     = {'B', 'M'},
-        .file_size                = sizeof(BMP_Header) + sizeof(BMP_Info_Header) + size_framebuffer,
+        .file_size                = static_cast<uint32_t>(sizeof(BMP_Header) + sizeof(BMP_Info_Header) + size_framebuffer),
         .reserved                 = {0},
         .offset_start_framebuffer = sizeof(BMP_Header) + sizeof(BMP_Info_Header)
     };
