@@ -70,7 +70,7 @@ Vous pouvez vérifier si vous avez déjà installé g++ en utilisant la commande
 
 Toutes les images de test se trouvent dans le répertoire "images", tandis que les résultats de l'algorithme se situent dans le répertoire "results/images". Dans le répertoire "results/example", vous trouverez des exemples de résultats obtenus à partir d'un algorithme de dithering.
 
-5.2	Commande pour exécuter sur une image, par exemple test0.png : ```.\main.exe .\images\test0.png```
+5.2	Commande pour exécuter sur une image, par exemple test0.png : ```./main ./images/test0.png```
 
 ## 6. Intérêt du projet
 

@@ -5,15 +5,8 @@
 #include <vector>
 #include <fstream>
 
-#include <direct.h>
-#include <io.h>
-#include <string>
-
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
-
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
 
 #define CHANNEL_RGB 3
 #define CHANNEL_CMYK 4
@@ -141,16 +134,6 @@ struct BMP_Color
 
 // -------------------------------------------------------------------------------------------------------- //
 
-void isDirExist()
-{
-	const char* dir = "./results/images"; 
-	if (_access(dir, 0) == -1)
-	{
-		_mkdir(dir);
-	}
-}
-
-
 int main(int argc, char *argv[]) {
 
     if(argc != 2)
@@ -158,8 +141,6 @@ int main(int argc, char *argv[]) {
         std::cout << "The number of the argument is not 2; perhaps you forgot the name of an image." << std::endl;
         return 0;
     }
-
-    isDirExist();
 
     int width = 0, height = 0, bpp = 0;
 
@@ -175,6 +156,8 @@ int main(int argc, char *argv[]) {
     rgbImgToCmykImg(input, cmyk_image, width, height);
 
     uint8_t* output = (uint8_t*)malloc(width * height);
+
+    memset(output, 0, width * height);
 
     ditheringAlgo(cmyk_image, width, height, thresholds, output);    
 
