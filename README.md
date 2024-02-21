@@ -48,7 +48,7 @@ Dans le fichier _main.cpp_, un tableau nommé **_thresholds_** est présent. Nou
 
 Admettons que $x$ représente l'intensité d'un canal dans un pixel d'image CMYK, et que $y$ représente la valeur d'intensité du canal compressé. Nous disposons des valeurs suivantes : $x \in \lbrace 0, 1, 2, ..., 255 \rbrace$ et $y \in \lbrace 0, 1, 2, 3 \rbrace$. La compression peut être effectuée en utilisant des seuils définis. 
 
-Par exemple, lorsque $x < 100$, $y = 0$; $100 <= x <180$, $y = 1$; $180 <= x < 255$, $y = 2$; $y = 255$, $x =3$.
+Par exemple, lorsque $x < 100$, $y = 0$; $100 <= x <180$, $y = 1$; $180 <= x < 255$, $y = 2$; $x = 255$, $y = 3$.
 
 Une autre approche pourrait être définie ainsi : lorsque $x < (thresholds[0] + thresholds[1]) / 2$, $y = 0$, et ainsi de suite.
 
@@ -99,3 +99,7 @@ KELENN Technology est une entreprise industrielle dans le domaine des systèmes 
 •	Économie de ressources : En convertissant les images en motifs de points, l'algorithme de dithering réduit la quantité d'encre ou de toner nécessaire à l'impression, ce qui peut contribuer à des économies de coûts significatives.
 
 •	Correction des variations de couleur : Le dithering peut aider à atténuer les variations de couleur ou de luminosité dans les images, assurant ainsi une reproduction plus fidèle des tons et des dégradés.
+
+
+
+
