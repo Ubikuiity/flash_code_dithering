@@ -46,9 +46,9 @@ Dans le fichier _main.cpp_, un tableau nommé **_thresholds_** est présent. Nou
     int thresholds[4] = {0, 100, 180, 255};
 ```
 
-Admettons que $x$ représente l'intensité d'un canal dans un pixel d'image CMYK, et que $y$ représente la valeur d'intensité du canal compressé. Nous disposons des valeurs suivantes : $x \in \{0, 1, 2, ..., 255\}$ et $y \in \{0, 1, 2, 3\}$. La compression peut être effectuée en utilisant des seuils définis. 
+Admettons que $x$ représente l'intensité d'un canal dans un pixel d'image CMYK, et que $y$ représente la valeur d'intensité du canal compressé. Nous disposons des valeurs suivantes : $x \in \lbrace 0, 1, 2, ..., 255 \rbrace$ et $y \in \lbrace 0, 1, 2, 3 \rbrace$. La compression peut être effectuée en utilisant des seuils définis. 
 
-Par exemple, lorsque $x < 100$, $y = 0$ ; lorsque $100 <= x <180$, $y = 1$ ; lorsque $180 <= x < 255$, $y = 2$ ; lorsque $y=255$, $x =3$.
+Par exemple, lorsque $x < 100$, $y = 0$; $100 <= x <180$, $y = 1$; $180 <= x < 255$, $y = 2$;$y=255$, $x =3$.
 
 Une autre approche pourrait être définie ainsi : lorsque $x < (thresholds[0] + thresholds[1]) / 2$, $y = 0$, et ainsi de suite.
 
