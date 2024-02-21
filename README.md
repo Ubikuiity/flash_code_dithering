@@ -42,6 +42,18 @@ Si chaque couleur représente un canal, une image RGB comporte trois canaux, tan
 
 Dans le fichier _main.cpp_, un tableau nommé **_thresholds_** est présent. Nous pouvons exploiter les valeurs de ce tableau pour compresser les couleurs.
 
+```
+    int thresholds[4] = {0, 100, 180, 255};
+```
+
+Admettons que $x$ représente l'intensité d'un canal dans un pixel d'image CMYK, et que $y$ représente la valeur d'intensité du canal compressé. Nous disposons des valeurs suivantes : $x \in {0, 1, 2, ..., 255}$ et $y \in {0, 1, 2, 3}$. La compression peut être effectuée en utilisant des seuils définis. 
+
+Par exemple, lorsque $x < 100$, $y = 0$ ; lorsque $100 <= x <180$, $y = 1$ ; lorsque $180 <= x < 255$, $y = 2$ ; lorsque $y=255$, $x =3$.
+
+Une autre approche pourrait être définie ainsi : lorsque $x < (thresholds[0] + thresholds[1]) / 2$, $y = 0$, et ainsi de suite.
+
+Vous avez également la possibilité d'utiliser une valeur aléatoire. Il est important de souligner qu'il n'existe pas de solution standard dans ce cas. Vous avez la liberté d'ajuster le seuil selon votre propre méthode de compression. Donc, vous pouvez jouer avec ce seuil et définir votre propre approche pour résoudre le problème.
+
 ### 3.2 Dithering image
 
 La partie la plus cruciale de ce projet consiste à élaborer un algorithme de dithering. Par conséquent, dans le fichier main.cpp, votre seule tâche consistera à écrire la fonction **_ditheringAlgo_**. Vous n'aurez pas besoin de modifier d'autres parties du code, mais vous êtes autorisé à le faire si nécessaire, en ajoutant des commentaires expliquant les raisons de ces modifications.
@@ -56,6 +68,12 @@ void ditheringAlgo(uint8_t* in, int width, int height, int* thresholds, uint8_t*
 (Indice : the size of **_in_** : 4 * width * height, the size of **_out_** : width * height)
 
 **Attention : Ajoutez des commentaires aux codes que vous avez écrits.**
+
+### 3.3 Examiner le résultat
+
+Dans la **_Figure 4_**, on observe deux images obtenues à l'aide de deux algorithmes de dithering différents. Celle de droite est préférable à celle de gauche, car ses couleurs sont plus aléatoires. En revanche, l'image de gauche présente de nombreuses rayures diagonales, visibles notamment dans le contraste de la zone rectangulaire noire.
+
+<img src="./figure/004.png" alt="Figure 4 : Analyser les résultats" style="height: 100px"/>
 
 ## 4. Environnement d'exécution
 
