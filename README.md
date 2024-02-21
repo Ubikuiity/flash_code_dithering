@@ -10,11 +10,11 @@ Le dithering consiste à ajouter un léger bruit aléatoire à l'image pour cré
 
 Voici un exemple : la **_Figure 1_** représente l'image originale, tandis que la **_Figure 2_** montre l'image après l'application d'un algorithme de dithering.
 
-<img src="./figure/001.png" alt="Figure 1 : Image d'origine" style="height: 100px"/>
+<img src="./figure/001.png" alt="Figure 1 : Image d'origine" style="height: 150px"/>
 
 Figure 1 : Image d'origine
 
-<img src="./figure/002.png" alt="Figure 2 : Image avec dithering" style="height: 100px"/>
+<img src="./figure/002.png" alt="Figure 2 : Image avec dithering" style="height: 150px"/>
 
 Figure 2 : Image avec dithering
 
@@ -34,7 +34,7 @@ Ainsi, chaque couleur est représentée par un octet, et l'ordre des couleurs es
 
 Comme expliqué dans la partie 2, chaque pixel est représenté par 4 octets. L'objectif du projet est d'utiliser un seul octet pour représenter quatre couleurs différentes. Ainsi, nous attribuons les deux premiers bits pour représenter la couleur C, les 2 bits suivants pour la couleur M, et ainsi de suite, comme illustré dans la **_Figure 3_**.
 
-<img src="./figure/003.png" alt="Figure 3 : Utilisation de 8 bits pour représenter 32 bits" style="height: 100px"/>
+<img src="./figure/003.png" alt="Figure 3 : Utilisation de 8 bits pour représenter 32 bits" style="height: 150px"/>
 
 Figure 3 : Utilisation de 8 bits pour représenter 32 bits
 
@@ -46,7 +46,7 @@ Dans le fichier _main.cpp_, un tableau nommé **_thresholds_** est présent. Nou
     int thresholds[4] = {0, 100, 180, 255};
 ```
 
-Admettons que $x$ représente l'intensité d'un canal dans un pixel d'image CMYK, et que $y$ représente la valeur d'intensité du canal compressé. Nous disposons des valeurs suivantes : $x \in {0, 1, 2, ..., 255}$ et $y \in {0, 1, 2, 3}$. La compression peut être effectuée en utilisant des seuils définis. 
+Admettons que $x$ représente l'intensité d'un canal dans un pixel d'image CMYK, et que $y$ représente la valeur d'intensité du canal compressé. Nous disposons des valeurs suivantes : $x \in \{0, 1, 2, ..., 255\}$ et $y \in \{0, 1, 2, 3\}$. La compression peut être effectuée en utilisant des seuils définis. 
 
 Par exemple, lorsque $x < 100$, $y = 0$ ; lorsque $100 <= x <180$, $y = 1$ ; lorsque $180 <= x < 255$, $y = 2$ ; lorsque $y=255$, $x =3$.
 
@@ -73,7 +73,7 @@ void ditheringAlgo(uint8_t* in, int width, int height, int* thresholds, uint8_t*
 
 Dans la **_Figure 4_**, on observe deux images obtenues à l'aide de deux algorithmes de dithering différents. Celle de droite est préférable à celle de gauche, car ses couleurs sont plus aléatoires. En revanche, l'image de gauche présente de nombreuses rayures diagonales, visibles notamment dans le contraste de la zone rectangulaire noire.
 
-<img src="./figure/004.png" alt="Figure 4 : Analyser les résultats" style="height: 100px"/>
+<img src="./figure/004.png" alt="Figure 4 : Analyser les résultats" style="height: 150px"/>
 
 ## 4. Environnement d'exécution
 
@@ -99,7 +99,3 @@ KELENN Technology est une entreprise industrielle dans le domaine des systèmes 
 •	Économie de ressources : En convertissant les images en motifs de points, l'algorithme de dithering réduit la quantité d'encre ou de toner nécessaire à l'impression, ce qui peut contribuer à des économies de coûts significatives.
 
 •	Correction des variations de couleur : Le dithering peut aider à atténuer les variations de couleur ou de luminosité dans les images, assurant ainsi une reproduction plus fidèle des tons et des dégradés.
-
-
-
-
