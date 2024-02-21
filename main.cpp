@@ -14,7 +14,20 @@
 
 void ditheringAlgo(uint8_t* in, int width, int height, int* thresholds, uint8_t* out)
 {
-    //TODO
+    // TODO
+}
+
+
+void findMinMaxCmyk(uint8_t* in, int height, int width, uint8_t* res)
+{
+    res[0] = 255;   // save min
+    res[1] = 0;     // save max
+
+    for(int i = 0; i < width * height * CHANNEL_CMYK; i++)
+    {
+        if(*(in + i) < res[0]) res[0] = *(in + i);
+        if(*(in + i) > res[1]) res[1] = *(in + i);
+    }
 }
 
 uint8_t lookupTable(uint8_t val)
@@ -42,9 +55,11 @@ void cmykToRgb(uint8_t cmyk, uint8_t* rgb)
     rgb[2] = 255 * (100 - y) * (100 - k) / 10000;       // B = 255*(100-Y)*(100-K)/10000;
 }
 
-void compressedCmykImgToRgbImg(uint8_t *compressedCmyk, uint8_t* rgbImg, int height, int width)
+void compressedCmykImgToRgbImg(uint8_t *input, uint8_t *compressedCmyk, uint8_t* rgbImg, int height, int width)
 {
     uint8_t rgb[3] = {0};
+    uint8_t minmax[2] = {0};
+    
     for(int i = 0; i < height; i++)
     {
         for(int j = 0; j < width; j++)
@@ -90,7 +105,6 @@ void rgbImgToCmykImg(uint8_t* input, uint8_t* cmyk_image, int width, int height)
                                (cmyk_image + i * width * CHANNEL_CMYK + (CHANNEL_CMYK * j + 1)), \
                                (cmyk_image + i * width * CHANNEL_CMYK + (CHANNEL_CMYK * j + 2)), \
                                (cmyk_image + i * width * CHANNEL_CMYK + (CHANNEL_CMYK * j + 3)));
-
         }
     }
 }
@@ -143,11 +157,10 @@ int main(int argc, char *argv[]) {
     }
 
     int width = 0, height = 0, bpp = 0;
-
     int thresholds[4] = {0, 100, 180, 255};
-
     uint8_t* input = stbi_load(argv[1], &width, &height, &bpp, 3);
 
+    std::cout << std::endl;
     std::cout << "The width of the image is:  " << width <<  "." << std::endl;
     std::cout << "The height of the image is: " << height << "." << std::endl;
 
@@ -166,7 +179,7 @@ int main(int argc, char *argv[]) {
 
     uint8_t* outputImage = (uint8_t*)malloc(width * height * CHANNEL_RGB);
 
-    compressedCmykImgToRgbImg(output, outputImage, height, width);
+    compressedCmykImgToRgbImg(cmyk_image, output, outputImage, height, width);
 
     char imgName[100];
 
@@ -215,7 +228,10 @@ int main(int argc, char *argv[]) {
         std::fwrite(framebuffer, sizeof(BMP_Color), width * height, f_out);
 
         std::fclose(f_out);
-    }  
+    }
+
+    std::cout << "Fin of execution, you can find the result in the folder 'results/images'."<< std::endl;  
+    std::cout << std::endl;
 
     delete[] framebuffer;
 
