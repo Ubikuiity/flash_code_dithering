@@ -20,6 +20,8 @@ Figure 2 : Image avec dithering
 
 Dans le répertoire **_images_**, vous trouverez les images originales, tandis que dans le répertoire **_results/example_**, vous découvrirez les images obtenues grâce à un algorithme de dithering.
 
+_Vous pouvez consulter des informations sur ce site web: [Wiki Dither](https://en.wikipedia.org/wiki/Dither)_
+
 ## 2. Cmyk Image
 
 CMYK et RGB sont deux modèles de couleur utilisés dans la reproduction des couleurs, mais ils sont utilisés dans des contextes différents.
