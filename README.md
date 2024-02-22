@@ -28,7 +28,7 @@ CMYK fait référence aux couleurs primaires utilisées dans l'impression : Cyan
 Ce modèle est largement utilisé dans l'industrie de l'impression, où les couleurs sont superposées en couches pour créer une gamme étendue de teintes.
 Dans notre modèle CMYK, chaque couleur est représentée par une valeur, allant de **0** (absence de couleur) à **255** (couleur pleine). En combinant différentes quantités de ces quatre encres, il est possible de reproduire une grande variété de couleurs.
 
-(Vous avez peut-être repéré les valeurs de chaque couleur exprimées en pourcentage ($p$) de _0_ à _100_ dans d'autres documents ou sur des sites web. Dans notre projet, nous appliquons la formule $p * 255$, ce qui signifie que les valeurs vont de _0_ à _255_.)
+( Vous avez peut-être repéré les valeurs de chaque couleur exprimées en pourcentage ($p$) de _0_ à _100_ dans d'autres documents ou sur des sites web. Dans notre projet, nous appliquons la formule $p * 255$, ce qui signifie que les valeurs vont de _0_ à _255_. )
 
 Ainsi, chaque couleur est représentée par un octet, et l'ordre des couleurs est le suivant : cyan (C), magenta (M), jaune (Y) et noir (K). Pour une image de dimensions, par exemple, de 50 pixels de large et 50 pixels de haut, la taille de cette image devrait être de 10 000 octets.
 
