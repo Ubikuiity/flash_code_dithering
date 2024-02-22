@@ -52,7 +52,7 @@ Admettons que $x$ représente l'intensité d'un canal dans un pixel d'image CMYK
 
 Par exemple, lorsque $x < thresholds[1]$, $y = 0$; $thresholds[1] <= x < thresholds[2]$, $y = 1$; $thresholds[2] <= x < thresholds[3]$, $y = 2$; $x = thresholds[3]$, $y = 3$.
 
-Ou lorsque $x = thresholds[0]$, $y = 0$; $thresholds[0] < x <= thresholds[1]$, $y = 1$; $thresholds[1] < x <= thresholds[2]$, $y = 2$; $x <= thresholds[3]$, $y = 3$.
+Ou lorsque $x = thresholds[0]$, $y = 0$; $thresholds[0] < x <= thresholds[1]$, $y = 1$; $thresholds[1] < x <= thresholds[2]$, $y = 2$; $thresholds[2] < x <= thresholds[3]$, $y = 3$.
 
 Une autre approche pourrait être définie ainsi : lorsque $x < (thresholds[0] + thresholds[1]) / 2$, $y = 0$, et ainsi de suite.
 
