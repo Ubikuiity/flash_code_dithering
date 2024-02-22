@@ -232,9 +232,6 @@ int main(int argc, char *argv[]) {
         std::fclose(f_out);
     }
 
-    std::cout << "Fin of execution, you can find the result in the folder 'results/images'."<< std::endl;  
-    std::cout << std::endl;
-
     delete[] framebuffer;
     // -------------------------------------------------------------------------------------------------------- //
     
@@ -243,5 +240,8 @@ int main(int argc, char *argv[]) {
     free(outputImage);
     stbi_image_free(input);
 
+    std::cout << "Fin of execution, you can find the result in the folder 'results/images'."<< std::endl;  
+    std::cout << std::endl;
+    
     return 0;
 }
