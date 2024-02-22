@@ -158,20 +158,22 @@ int main(int argc, char *argv[]) {
 
     int width = 0, height = 0, bpp = 0;
     int thresholds[4] = {0, 100, 180, 255};
+
+    // Store the input RGB image in the pointer named "input", and record the image's width and height in variables labeled "width" and "height".
+    // Please note that the size of "input" is calculated as width multiplied by height, and then multiplied by CHANNEL_RGB.
     uint8_t* input = stbi_load(argv[1], &width, &height, &bpp, 3);
 
     std::cout << std::endl;
     std::cout << "The width of the image is:  " << width <<  "." << std::endl;
     std::cout << "The height of the image is: " << height << "." << std::endl;
 
+    // Convert the input RGB image format to CMYK.
     uint8_t* cmyk_image = (uint8_t*)malloc(width * height * CHANNEL_CMYK);
-
     rgbImgToCmykImg(input, cmyk_image, width, height);
 
+    // Utilize a dithering algorithm to process the CMYK image and store the result in the pointer labeled "output".
     uint8_t* output = (uint8_t*)malloc(width * height);
-
     memset(output, 0, width * height);
-
     ditheringAlgo(cmyk_image, width, height, thresholds, output);    
 
     std::string fileNa = std::string(argv[1]);
@@ -185,7 +187,8 @@ int main(int argc, char *argv[]) {
 
     strcpy(imgName, outputFile.c_str()); 
 
-    // Specification des donnees des headers
+    // Save the resulting RGB image in BMP format.
+    // -------------------------------------------------------------------------------------------------------- //
     const uint32_t size_framebuffer = width * height * sizeof(BMP_Color);
 
     const BMP_Header bmp_header = {
@@ -234,7 +237,8 @@ int main(int argc, char *argv[]) {
     std::cout << std::endl;
 
     delete[] framebuffer;
-
+    // -------------------------------------------------------------------------------------------------------- //
+    
     free(cmyk_image);
     free(output);
     free(outputImage);
