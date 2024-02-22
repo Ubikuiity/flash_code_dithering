@@ -55,7 +55,7 @@ void cmykToRgb(uint8_t cmyk, uint8_t* rgb)
     rgb[2] = 255 * (100 - y) * (100 - k) / 10000;       // B = 255*(100-Y)*(100-K)/10000;
 }
 
-void compressedCmykImgToRgbImg(uint8_t *input, uint8_t *compressedCmyk, uint8_t* rgbImg, int height, int width)
+void compressedCmykImgToRgbImg(uint8_t *compressedCmyk, uint8_t* rgbImg, int height, int width)
 {
     uint8_t rgb[3] = {0};
     uint8_t minmax[2] = {0};
@@ -176,15 +176,14 @@ int main(int argc, char *argv[]) {
     memset(output, 0, width * height);
     ditheringAlgo(cmyk_image, width, height, thresholds, output);    
 
+    // Transform the output into an RGB image.
+    uint8_t* outputImage = (uint8_t*)malloc(width * height * CHANNEL_RGB);
+    compressedCmykImgToRgbImg(output, outputImage, height, width);
+
+    // Generate the complete path name for the resulting image.
     std::string fileNa = std::string(argv[1]);
     std::string outputFile = "results/" + fileNa + ".bmp";
-
-    uint8_t* outputImage = (uint8_t*)malloc(width * height * CHANNEL_RGB);
-
-    compressedCmykImgToRgbImg(cmyk_image, output, outputImage, height, width);
-
     char imgName[100];
-
     strcpy(imgName, outputFile.c_str()); 
 
     // Save the resulting RGB image in BMP format.
