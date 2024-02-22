@@ -18,6 +18,8 @@ Figure 1 : Image d'origine
 
 Figure 2 : Image avec dithering
 
+Dans le répertoire **_images_**, vous trouverez les images originales, tandis que dans le répertoire **_results/example_**, vous découvrirez les images obtenues grâce à un algorithme de dithering.
+
 ## 2. Cmyk Image
 
 CMYK et RGB sont deux modèles de couleur utilisés dans la reproduction des couleurs, mais ils sont utilisés dans des contextes différents.
@@ -48,7 +50,7 @@ Dans le fichier _main.cpp_, un tableau nommé **_thresholds_** est présent. Nou
 
 Admettons que $x$ représente l'intensité d'un canal dans un pixel d'image CMYK, et que $y$ représente la valeur d'intensité du canal compressé. Nous disposons des valeurs suivantes : $x \in \lbrace 0, 1, 2, ..., 255 \rbrace$ et $y \in \lbrace 0, 1, 2, 3 \rbrace$. La compression peut être effectuée en utilisant des seuils définis. 
 
-Par exemple, lorsque $x < 100$, $y = 0$; $100 <= x <180$, $y = 1$; $180 <= x < 255$, $y = 2$; $x = 255$, $y = 3$.
+Par exemple, lorsque $x < 100$, $y = thresholds[0]$; $thresholds[1] <= x < thresholds[2]$, $y = 1$; $thresholds[2] <= x < thresholds[3]$, $y = 2$; $x = thresholds[3]$, $y = 3$.
 
 Une autre approche pourrait être définie ainsi : lorsque $x < (thresholds[0] + thresholds[1]) / 2$, $y = 0$, et ainsi de suite.
 
@@ -74,6 +76,8 @@ void ditheringAlgo(uint8_t* in, int width, int height, int* thresholds, uint8_t*
 Dans la **_Figure 4_**, on observe deux images obtenues à l'aide de deux algorithmes de dithering différents. Celle de droite est préférable à celle de gauche, car ses couleurs sont plus aléatoires. En revanche, l'image de gauche présente de nombreuses rayures diagonales, visibles notamment dans le contraste de la zone rectangulaire noire.
 
 <img src="./figure/004.png" alt="Figure 4 : Analyser les résultats" style="height: 150px"/>
+
+Figure 4 : Deux images ont été obtenues en utilisant deux algorithmes de dithering
 
 ## 4. Environnement d'exécution
 
