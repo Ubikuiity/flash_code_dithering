@@ -52,6 +52,8 @@ Admettons que $x$ représente l'intensité d'un canal dans un pixel d'image CMYK
 
 Par exemple, lorsque $x < thresholds[1]$, $y = 0$; $thresholds[1] <= x < thresholds[2]$, $y = 1$; $thresholds[2] <= x < thresholds[3]$, $y = 2$; $x = thresholds[3]$, $y = 3$.
 
+Ou lorsque $x = thresholds[0]$, $y = 0$; $thresholds[0] < x <= thresholds[1]$, $y = 1$; $thresholds[1] < x <= thresholds[2]$, $y = 2$; $x <= thresholds[3]$, $y = 3$.
+
 Une autre approche pourrait être définie ainsi : lorsque $x < (thresholds[0] + thresholds[1]) / 2$, $y = 0$, et ainsi de suite.
 
 Vous avez également la possibilité d'utiliser une valeur aléatoire. Il est important de souligner qu'il n'existe pas de solution standard dans ce cas. Vous avez la liberté d'ajuster le seuil selon votre propre méthode de compression. Donc, vous pouvez jouer avec ce seuil et définir votre propre approche pour résoudre le problème.
