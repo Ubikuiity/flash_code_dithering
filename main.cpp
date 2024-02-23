@@ -11,7 +11,7 @@
 #define CHANNEL_RGB 3
 #define CHANNEL_CMYK 4
 
-
+// Please indicate your first and last name here: [First Name and Last Name]
 void ditheringAlgo(uint8_t* in, int width, int height, int* thresholds, uint8_t* out)
 {
     // TODO
