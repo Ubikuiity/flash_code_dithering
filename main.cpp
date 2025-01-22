@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <vector>
 #include <fstream>
+#include <random>
+#include <ctime>
 
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
@@ -11,12 +13,49 @@
 #define CHANNEL_RGB 3
 #define CHANNEL_CMYK 4
 
-// Please indicate your first and last name here: [First Name and Last Name]
-void ditheringAlgo(uint8_t* in, int width, int height, int* thresholds, uint8_t* out)
+// Takes a value between 0 and 255 and returns 0, 1, 2, 3 depending on the given thresholds
+uint8_t get_threshold_val(uint8_t val, int* thresholds)
 {
-    // TODO
+    if (val < thresholds[0])
+    {
+        return 0;
+    }
+    if (val < thresholds[1])
+    {
+        return 1;
+    }
+    if (val < thresholds[2])
+    {
+        return 2;
+    }
+    return 3;
 }
 
+// in_format : [c0, m0, y0, k0, c1, m1, y1, k1, ...] lines
+// out_format : [cmyk0, cmyk1, ...]  lines
+void ditheringAlgo(uint8_t* in, int width, int height, int* thresholds, uint8_t* out, uint8_t noise_strenght)
+{
+    std::mt19937 random_gen;
+    random_gen.seed(std::time(0));
+    // itterate over each pixel
+    for(int i = 0; i < height; i++)
+    {
+        for(int j = 0; j < width; j++)
+        {
+            int current_pixel_index = i * width + j;
+            uint8_t compressed_pixel_value = 0;
+            for(int channel=0; channel<CHANNEL_CMYK; channel++)  // channels in order : c, m, y, k
+            {
+                int r = random_gen() & 0b11111111;  // Only keep the last 8 bits (not necessary)
+                uint8_t noise = r % noise_strenght;  // Gets a value between 0 and noise_strenght
+                uint8_t noised_value = std::min(in[current_pixel_index * CHANNEL_CMYK + channel] + noise, 255);
+                uint8_t channel_compressed_value = get_threshold_val(noised_value, thresholds);
+                compressed_pixel_value += (channel_compressed_value << (2 * (CHANNEL_CMYK - 1 - channel)));  // Set the value in the correct bits
+            }
+            out[current_pixel_index] = compressed_pixel_value;  // Pixel bits : CCMMYYKK
+        }
+    }
+}
 
 void findMinMaxCmyk(uint8_t* in, int height, int width, uint8_t* res)
 {
@@ -174,7 +213,7 @@ int main(int argc, char *argv[]) {
     // Utilize a dithering algorithm to process the CMYK image and store the result in the pointer labeled "output".
     uint8_t* output = (uint8_t*)malloc(width * height);
     memset(output, 0, width * height);
-    ditheringAlgo(cmyk_image, width, height, thresholds, output);    
+    ditheringAlgo(cmyk_image, width, height, thresholds, output, 20);
 
     // Transform the output into an RGB image.
     uint8_t* outputImage = (uint8_t*)malloc(width * height * CHANNEL_RGB);
