@@ -45,9 +45,9 @@ void cmykToRgb(uint8_t cmyk, uint8_t* rgb)
     uint8_t mask_y = 12;   //0b00001100
     uint8_t mask_k = 3;    //0b00000011
 
-    uint8_t c = lookupTable(mask_c & cmyk);
-    uint8_t m = lookupTable(mask_m & cmyk);
-    uint8_t y = lookupTable(mask_y & cmyk);
+    uint8_t c = lookupTable((mask_c & cmyk) >> 6);
+    uint8_t m = lookupTable((mask_m & cmyk) >> 4);
+    uint8_t y = lookupTable((mask_y & cmyk) >> 2);
     uint8_t k = lookupTable(mask_k & cmyk);
 
     rgb[0] = 255 * (100 - c) * (100 - k) / 10000;       // R = 255*(100-C)*(100-K)/10000；
@@ -182,6 +182,7 @@ int main(int argc, char *argv[]) {
 
     // Generate the complete path name for the resulting image.
     std::string fileNa = std::string(argv[1]);
+    fileNa = fileNa.substr(0, fileNa.rfind('.'));  // Get input path without . extension
     std::string outputFile = "results/" + fileNa + ".bmp";
     char imgName[100];
     strcpy(imgName, outputFile.c_str()); 
